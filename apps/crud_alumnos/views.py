@@ -1,0 +1,40 @@
+# Paso 11. Crear una vista
+# Paso 12. Agregar a la carpeta static los archivos css y js del framework
+#          materialize
+# Paso 13. Crear las carpetas 'base' y 'crudalumnos' en la carpeta templates
+# Paso 14. Crear los archivos base.html y alumnos_form.html y guardarlos en
+#          las carpetas 'base' y 'crudalumnos' respectivamente
+
+from django.shortcuts import render
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
+from apps.crud_alumnos.models import alumnos
+from apps.crud_alumnos.forms import alumnosForm
+from django.urls import reverse_lazy
+
+# Create your views here.
+
+class alumnosCreate(CreateView):
+    model = alumnos
+    form_class = alumnosForm
+    template_name = 'crudalumnos/alumnos_form.html'
+    success_url = reverse_lazy('alumnos:alumnos_listar')
+
+class alumnosList(ListView):
+    queryset = alumnos.objects.order_by('nocontrol')
+    template_name = 'crudalumnos/alumnos_list.html'
+    paginate_by = 10
+
+class alumnosUpdate(UpdateView):
+    model = alumnos
+    form_class = alumnosForm
+    template_name = 'crudalumnos/alumnos_form.html'
+    success_url = reverse_lazy('alumnos:alumnos_listar')
+
+class alumnosDelete(DeleteView):
+    model = alumnos
+    template_name = 'crudalumnos/alumnos_delete.html'
+    success_url = reverse_lazy('alumnos:alumnos_listar')
+
+class alumnoShow(DetailView):
+    model = alumnos
+    template_name = 'crudalumnos/alumno_show.html'
