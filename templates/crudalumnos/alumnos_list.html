@@ -1,44 +1,33 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col s12 m12 l12">
-        <table class="striped">
-	        <thead>
-		        <tr>
-			        <td>No. Control</td>
-			        <td>Nombres</td>
-			        <td>Apellido Paterno</td>
-                    <td>Apellido Materno</td>
-			        <td>Fecha de Nacimiento</td>
-                    <td>Carrera</td>
-                </tr>
-            </thead>
-            <tbody>
-		        {% if object_list %}
-		        {% for alumnos in object_list %}
-		        <tr>
-			        <td>{{ alumnos.nocontrol }}</td>
-			        <td>{{ alumnos.nombre }}</td>
-			        <td>{{ alumnos.apellido_paterno }}</td>
-			        <td>{{ alumnos.apellido_materno }}</td>
-			        <td>{{ alumnos.fecha_nacimiento }}</td>
-			        <td>{{ alumnos.carreras }}</td>
-			        <td>
-                            <a class="btn" href="{% url 'alumnos:alumno_mostrar' alumnos.nocontrol %}"><i class="material-icons">zoom_in</i> </a>
-                            <a class="btn blue" href="{% url 'alumnos:alumno_editar' alumnos.nocontrol %}"><i class="material-icons">create</i></a>
-                            <a class="btn red" href="{% url 'alumnos:alumno_eliminar' alumnos.nocontrol %}"><i class="material-icons">delete</i></a>
-			        </td>
-		        </tr>
-		        {% endfor %}
 
+     {% if object_list %}
+    {% for alumnos in object_list %}
+
+<div class="row">
+    <div class="col s12 m7">
+        <div class="card">
+            <div class="card blue lighten-5">
+                <div class="card-content black-text">
+                    <span class="card-title">{{ alumnos.nocontrol }}</span>
+                    <p>Nombre Completo: {{alumnos.nombre }} {{ alumnos.apellido_paterno }} {{ alumnos.apellido_materno}}</p>
+                    <p>Fecha de Nacimiento: {{ alumnos.fecha_nacimiento }}</p>
+                    <p>Carrera: {{ alumnos.carreras }}</p>
+        </div>
+        <div class="card-action">
+            <a class="btn green" href="{% url 'alumnos:alumno_mostrar' alumnos.nocontrol %}"><i class="material-icons">zoom_in</i> </a>
+            <a class="btn blue" href="{% url 'alumnos:alumno_editar' alumnos.nocontrol %}"><i class="material-icons">create</i></a>
+            <a class="btn red" href="{% url 'alumnos:alumno_eliminar' alumnos.nocontrol %}"><i class="material-icons">delete</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+        {% endfor %}
                 {% else %}
 		            <h1>No hay registros de alumnos</h1>
 		        {% endif %}
-            </tbody>
-        </table>
-    </div>
-</div>
+
     <div class="row">
         <div class="col s12 m12 l12">
             <ul class="pagination center">
@@ -55,5 +44,5 @@
             </ul>
         </div>
     </div>
-
+</div>>
 {% endblock%}

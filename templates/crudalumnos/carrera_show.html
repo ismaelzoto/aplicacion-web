@@ -1,0 +1,15 @@
+{% extends 'base/bases.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m12 l12">
+        <p><strong>N&uacute;mero de control: </strong>{{ object.id }} </p>
+        <p><strong>Nombre: </strong>{{ object.nombre }} </p>
+        <a class= "btn" href="{% url 'carreras:carrera_lista' %}">Ok</a>
+        <a class= "btn blue" href="{% url 'carreras:carrera_edita' object.id%}"><i class="material-icons">create</i></a>
+        <a class="btn red" href="{% url 'carreras:carrera_borrar' object.id %}"><i class="material-icons">delete</i></a>
+    </div>
+</div>
+
+
+{% endblock %}

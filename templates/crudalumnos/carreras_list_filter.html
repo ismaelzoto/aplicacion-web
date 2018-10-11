@@ -1,0 +1,60 @@
+{% extends 'base/bases.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m12 l12">
+        <h4>Filtrar por:</h4>
+        <form method="get">
+            <p>
+            <div class="col s4 m4 l4">
+                Nombre de la carrera: &nbsp {{ filter.form.nombre }} &nbsp
+                <button class="btn blue" type="submit">Filtrar</button>
+            </div>
+            </p>
+        </form>
+        <table class="striped">
+	        <thead>
+		        <tr>
+			        <td>Clave de la Carrera:</td>
+			        <td>Nombre de la Carrera:</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% if filter.qs %}
+                {% for carreras in filter.qs %}
+		        <tr>
+			        <td>{{ carreras.id }}</td>
+			        <td>{{ carreras.nombre }}</td>
+			        <td>
+				        <a class="btn" href="{% url 'carreras:carrera_ver' carreras.id %}"><i class="material-icons">zoom_in</i></a>
+                        <a class="btn blue" href="{% url 'carreras:carrera_edita' carreras.id %}"><i class="material-icons">create</i></a>
+                        <a class="btn red" href="{% url 'carreras:carrera_borrar' carreras.id %}"><i class="material-icons">delete</i></a>
+			        </td>
+		        </tr>
+		        {% endfor %}
+
+                {% else %}
+		            <h3>No hay registro de la Carrera</h3>
+		        {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <ul class="pagination center">
+	            <li>
+		        {% if page_obj.has_previous %}
+       	            <a class="btn blue" href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">navigate_before</i></a>
+		        {% endif %}
+                </li>
+	            <li>
+		        {% if page_obj.has_next %}
+     	            <a class="btn red" href="?page={{ page_obj.next_page_number }}"><i class="material-icons">navigate_next</i></a>
+    	        {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock%}

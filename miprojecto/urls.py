@@ -20,6 +20,8 @@ urlpatterns = [
 ]
 """
 from django.conf.urls import url, include
+
 urlpatterns = [
-	url(r'^alumnos/', include(('apps.crud_alumnos.urls', 'apps'), namespace='alumnos'))
+url(r'^alumnos/', include(('apps.crud_alumnos.urls', 'apps'), namespace='alumnos')),
+url(r'^carreras/', include(('apps.crud_alumnos.urls', 'apps'), namespace='carreras'))
 ]

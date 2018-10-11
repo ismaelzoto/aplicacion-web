@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class carreras(models.Model):
     id = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=100)
@@ -10,6 +11,7 @@ class carreras(models.Model):
 
     def __str__(self):
         return '{}'.format(self.nombre)
+
 
 class alumnos(models.Model):
     nocontrol = models.BigIntegerField(primary_key=True)

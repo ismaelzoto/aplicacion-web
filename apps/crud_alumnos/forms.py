@@ -1,7 +1,8 @@
 # aqui se Crea el formulario
 
 from django import forms
-from apps.crud_alumnos.models import alumnos
+from apps.crud_alumnos.models import alumnos, carreras
+
 
 class alumnosForm(forms.ModelForm):
     class Meta:
@@ -30,4 +31,21 @@ class alumnosForm(forms.ModelForm):
             'apellido_materno': forms.TextInput(attrs={'class':'form-control'}),
             'fecha_nacimiento': forms.TextInput(attrs={'class':'datepicker'}),
             'carreras': forms.Select(attrs={'class':'form-control'}),
+        }
+
+
+class carrerasForm(forms.ModelForm):
+    class Meta:
+        model = carreras
+        fields = [
+            'id',
+            'nombre'
+        ]
+        labels = {
+            'id':'Clave de Carrera',
+            'nombre':'Nombre de la Carrera'
+        }
+        widgets = {
+            'id':forms.TextInput(attrs={'class':'form-control'}),
+            'nombre':forms.TextInput(attrs={'class':'form-control'})
         }
